@@ -85,7 +85,25 @@ public class SimpleGameEngine extends Activity {
         // GameView class will go here
         @Override
         public void run() {
+            while (playing) {
 
+                // Capture the current time in milliseconds in startFrameTime
+                long startFrameTime = System.currentTimeMillis();
+
+                // Update the frame
+                update();
+
+                // Draw the frame
+                draw();
+
+                // Calculate the fps this frame
+                // We can then use the result to
+                // time animations and more.
+                timeThisFrame = System.currentTimeMillis() - startFrameTime;
+                if (timeThisFrame > 0) {
+                    fps = 1000 / timeThisFrame;
+                }
+            }
         }
     }
 }
