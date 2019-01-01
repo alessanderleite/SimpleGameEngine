@@ -105,5 +105,17 @@ public class SimpleGameEngine extends Activity {
                 }
             }
         }
+
+        // Everything that needs to be updated goes in here
+        // In later projects we will have dozens (array) of objects.
+        // We will also do other things like collision detection.
+        public void update() {
+
+            // If bob is moving (the player is touching the screen)
+            // then move him to the right based on his target speed and the current fps.
+            if (isMoving) {
+                bobXPosition = bobXPosition + (walkSpeedPerSecond / fps);
+            }
+        }
     }
 }
