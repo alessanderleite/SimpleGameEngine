@@ -7,9 +7,18 @@ import android.view.SurfaceView;
 
 public class SimpleGameEngine extends Activity {
 
+    // gameView will be the view of the game
+    // It will also hold the logic of the game
+    // and respond to screen touches as well
+    GameView gameView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Initialize gameView and set it as the view
+        gameView = new GameView(this);
+        setContentView(gameView);
     }
 
     // Here is our implementation of GameView
@@ -22,6 +31,7 @@ public class SimpleGameEngine extends Activity {
             super(context);
         }
 
+        // GameView class will go here
         @Override
         public void run() {
 
