@@ -3,6 +3,7 @@ package br.com.alessanderleite.simplegameengine;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -65,8 +66,20 @@ public class SimpleGameEngine extends Activity {
         // He starts 10 pixels form the left
         float bobXPosition = 10;
 
+        // When the we initialize (call new()) on gameView
+        // This special constructor method runs
         public GameView(Context context) {
+            // The next line of code asks the
+            // SurfaceView class to set up our object
+            // How kind.
             super(context);
+
+            // Initialize ourHolder and paint objects
+            ourHolder = getHolder();
+            paint = new Paint();
+
+            // Load Bob from his .png file
+            bitmapBob = BitmapFactory.decodeResource(this.getResources(), R.drawable.bob);
         }
 
         // GameView class will go here
