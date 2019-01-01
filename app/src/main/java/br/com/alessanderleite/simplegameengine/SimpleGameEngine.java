@@ -198,4 +198,24 @@ public class SimpleGameEngine extends Activity {
         }
     }
     // This is the end of our GameView inner class
+
+    // This method executes when the player starts the game
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Tell the gameView resume method to execute
+        gameView.resume();
+    }
+
+    // This method executes when the player quits the game
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Tell the gameView pause method to execute
+        gameView.pause();
+    }
 }
