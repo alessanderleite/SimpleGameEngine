@@ -2,7 +2,11 @@ package br.com.alessanderleite.simplegameengine;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class SimpleGameEngine extends Activity {
@@ -26,6 +30,40 @@ public class SimpleGameEngine extends Activity {
     // Note how the final closing curly brace }
     // is inside SimpleGameEngine
     class GameView extends SurfaceView implements Runnable {
+
+        // This is our thread
+        Thread gameThread = null;
+
+        //This is new. We need a SurfaceHolder
+        // When we use Paint and Canvas in a thread
+        // We will see it in action in the draw method soon.
+        SurfaceHolder ourHolder;
+
+        // A boolean which we will set and unset
+        // when the game is running- or not
+        volatile boolean playing;
+
+        // A Canvas and a Paint object
+        Canvas canvas;
+        Paint paint;
+
+        // This variable tracks the game frame rate
+        long fps;
+
+        // This is used to help calculate the fps
+        private long timeThisFrame;
+
+        // Declare an object of type Bitmap
+        Bitmap bitmapBob;
+
+        // Bob starts off not moving
+        boolean isMoving = false;
+
+        // He can walk at 150 pixels per second
+        float walkSpeedPerSecond = 150;
+
+        // He starts 10 pixels form the left
+        float bobXPosition = 10;
 
         public GameView(Context context) {
             super(context);
