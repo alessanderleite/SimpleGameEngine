@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
@@ -115,6 +116,36 @@ public class SimpleGameEngine extends Activity {
             // then move him to the right based on his target speed and the current fps.
             if (isMoving) {
                 bobXPosition = bobXPosition + (walkSpeedPerSecond / fps);
+            }
+        }
+
+        // Draw the newly updated scene
+        public void draw() {
+
+            // Make sure our drawing surface is valid or we crash
+            if (ourHolder.getSurface().isValid()) {
+                // Lock the canvas ready to draw
+                // Make the drawing surface our canvas object
+                canvas = ourHolder.lockCanvas();
+
+                // Draw the background color
+                canvas.drawColor(Color.argb(255,26,128,182));
+
+                // Choose the brush color for drawing
+                paint.setColor(Color.argb(255,249,129,0));
+
+                // Make the text a bit bigger
+                paint.setTextSize(45);
+
+                // Display the current fps on the screen
+                canvas.drawText("FPS:" + fps,20,40, paint);
+
+                // Draw bob at bobXPosition, 200 pixels
+                canvas.drawBitmap(bitmapBob, bobXPosition, 200, paint);
+
+                // Draw everything to the screen
+                // and unlock the drawing surface
+                ourHolder.unlockCanvasAndPost(canvas);
             }
         }
     }
