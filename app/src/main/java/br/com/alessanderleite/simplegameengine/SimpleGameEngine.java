@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -168,5 +169,33 @@ public class SimpleGameEngine extends Activity {
             gameThread = new Thread(this);
             gameThread.start();
         }
+
+        // The SurfaceView class implements onTouchListener
+        // So we can override this method and detect screen touches.
+
+        @Override
+        public boolean onTouchEvent(MotionEvent motionEvent) {
+
+            switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
+
+                // Player has touched the screen
+                case MotionEvent.ACTION_DOWN:
+
+                    // Set isMoving so Bob is moved in the update method
+                    isMoving = true;
+
+                    break;
+
+                // Player has removed finger from screen
+                case MotionEvent.ACTION_UP:
+
+                    // Set isMoving so Bob does not move
+                    isMoving = false;
+
+                    break;
+            }
+            return true;
+        }
     }
+    // This is the end of our GameView inner class
 }
